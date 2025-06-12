@@ -1,3 +1,22 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+	--color-accent: #273384;
+	--color-accent-foreground: #e9e201;
+}
+
+@layer base {
+	@layer base {
+		body {
+			@apply text-neutral-800;
+			@apply bg-neutral-50;
+			@apply selection:bg-accent/90 selection:text-white;
+		}
+	}
+}
+
+@layer components, utilities;
