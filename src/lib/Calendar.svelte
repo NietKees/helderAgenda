@@ -1,24 +1,21 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type {Agenda, AgendaItem} from '$lib/types';
 
-	interface AgendaItem {
-		title: string;
-		time: string;
-		description?: string;
-	}
+	// let agenda: Agenda[] = [];
 
-	interface Agenda {
-		date: string; // 'day-month-year'
-		items: AgendaItem[];
-	}
+	let { agenda } : {agenda: Agenda[]} = $props();
+
+	console.log('agenda in calendar', agenda)
+
 
 	const today = new Date();
 	const todayDate = today.getDate();
 	const todayMonth = today.getMonth();
 	const todayYear = today.getFullYear();
 
-	let year = todayYear;
-	let month = todayMonth;
+	let year = $state(todayYear);
+	let month = $state(todayMonth);
 
 	let monthNames = [
 		'January', 'February', 'March', 'April', 'May', 'June',
@@ -26,16 +23,13 @@
 	];
 
 	let daysInMonth = 0;
-	let blankDays = 0;
-	let dates: number[] = [];
+	let blankDays = $state(0);
+	let dates: number[] = $state([]);
 
-	let agenda: Agenda[] = [
-		{ date: '10-6-2025', items: [{ title: 'Bijles exact', time: '10-12' }] },
-		{ date: '15-8-2024', items: [{ title: 'Submit report', time: '12:00' }] }
-	];
 
-	let selectedDay: { day: number; month: number; year: number } | null = null;
-	let selectedEvents: AgendaItem[] = [];
+
+	let selectedDay: { day: number; month: number; year: number } | null = $state(null);
+	let selectedEvents: AgendaItem[] = $state([]);
 
 	function formatDate(day: number, month: number, year: number) {
 		return `${day}-${month + 1}-${year}`; // month+1 because JS months are 0-indexed
@@ -90,6 +84,7 @@
 		}
 		generateCalendar();
 	}
+
 </script>
 
 <div class="px-10 grid grid-cols-[auto_1fr]">
@@ -98,12 +93,12 @@
 		<!-- Header -->
 		<div class="py-4 text-center mb-4">
 			<div class="flex justify-between items-center px-6">
-				<span class="text-2xl cursor-pointer" on:click={prevMonth}>&#10094;</span>
+				<button class="text-2xl cursor-pointer" onclick={prevMonth}>&#10094;</button>
 				<div>
 					<p class="text-xl font-semibold">{monthNames[month]}</p>
 					<p class="text-md">{year}</p>
 				</div>
-				<span class="text-2xl cursor-pointer" on:click={nextMonth}>&#10095;</span>
+				<button class="text-2xl cursor-pointer" onclick={nextMonth}>&#10095;</button>
 			</div>
 		</div>
 
@@ -137,7 +132,7 @@
 			? 'bg-accent-foreground/20 outline-1'
 			: ' hover:outline-1 '}
 		`}
-					on:click={() => openDetails(day)}
+					onclick={() => openDetails(day)}
 				>
 					<p class="font-bold text-gray-700">{day}</p>
 
@@ -159,7 +154,7 @@
 			<div class="flex justify-between items-center">
 				<h2 class="text-lg font-bold mb-2">{monthNames[selectedDay.month]} {selectedDay.day}, {selectedDay.year}</h2>
 				<button
-					on:click={closeModal}
+					onclick={closeModal}
 					class="text-gray-500 hover:text-gray-700 text-xl"
 				>
 					&times;
