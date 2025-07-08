@@ -5,9 +5,9 @@
 </script>
 
 <div class=" text-white h-20 w-full flex justify-between px-10 items-center bg-accent">
-	<button>
+	<a href="/">
 		Home
-	</button>
+	</a>
 
 	<div>
 		<h1 class="text-4xl">Helder Agenda</h1>

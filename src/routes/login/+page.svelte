@@ -8,17 +8,6 @@
 <div class="h-full w-full flex flex-col flex-row-[auto_1fr]">
 	<div class="flex h-full justify-center pt-12">
 		<div class="flex py-10 justify-center w-full h-fit gap-40">
-			{#if currentUser}
-				<div class="flex flex-col justify-between items-center">
-					<div class="text-2xl px-8">
-						Currently logged in as:
-					</div>
-					<div class="text-4xl p-8">
-						{currentUser.email}
-					</div>
-					<button class="italic underline text-accent rounded-md px-2 py-1 hover:cursor-pointer">Log out</button>
-				</div>
-			{/if}
 			<div class="flex flex-col gap-10 items-center">
 				<h1 class="text-4xl ">Log in</h1>
 				<form method="POST" action="?/login" class="flex flex-col gap-4">
@@ -47,10 +36,4 @@
 			</div>
 		</div>
 	</div>
-	{#if currentUser}
-		<div class="h-full flex justify-center items-center">
-			<a class="rounded-md  text-4xl bg-accent-foreground px-4 py-2 hover:cursor-pointer"
-			href="/{currentUser.id}">View Agenda</a>
-		</div>
-	{/if}
 </div>

@@ -5,7 +5,7 @@ import { goto } from '$app/navigation';
 
 export const load = async ({ cookies }) => {
 	const user = await db.getUserFromSession(cookies.get('sessionid') ?? '');
-	// if (user) throw redirect(303, `/${user.id}`);
+	if (user) throw redirect(303, `/account`);
 	return { user: user };
 };
 
