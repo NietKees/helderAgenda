@@ -1,17 +1,22 @@
+<script>
 
+	let { user } = $props();
 
+</script>
 
 <div class=" text-white h-20 w-full flex justify-between px-10 items-center bg-accent">
-	<button>
+	<a href="/">
 		Home
-	</button>
+	</a>
 
 	<div>
 		<h1 class="text-4xl">Helder Agenda</h1>
 	</div>
 
-	<button >
-		<a href="/login">Login</a>
-	</button>
+	{#if user}
+		<a href="/account" class="hover:underline">Account</a>
+	{:else}
+		<a href="/login" class="hover:underline">Login</a>
+	{/if}
 
 </div>
