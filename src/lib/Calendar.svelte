@@ -124,13 +124,13 @@
 			{#each dates as day (day)}
 				<!--{#let dayDate = formatDate(day, month, year)}-->
 				<li
-					class={`border w-28 rounded-lg p-1 h-24 relative cursor-pointer transition hover:scale-[1.02]
+					class={`border border-2 shadow w-28 rounded-lg p-1 h-24 relative cursor-pointer transition hover:scale-[1.02] hover:outline-1
 		${day === todayDate && month === todayMonth && year === todayYear
-			? 'bg-accent/20 hover:outline-1'
-			: ' hover:outline-1 '}
+			? 'bg-accent/20 '
+			: ''}
 		${selectedDay && selectedDay.day === day && selectedDay.month === month && selectedDay.year === year
-			? 'bg-accent-foreground/20 outline-1'
-			: ' hover:outline-1 '}
+			? 'outline-accent! border-accent! outline-1 border-1'
+			: 'outline-black/50 border-black/50'}
 		`}
 					onclick={() => openDetails(day)}
 				>

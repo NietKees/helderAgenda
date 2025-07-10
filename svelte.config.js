@@ -17,7 +17,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: process.argv.includes('dev') ?  '' : '/helderAgenda'
+			base: process.argv.includes('dev') ?  '' : process.env.Base_PATH
 		}
 	}
 };
